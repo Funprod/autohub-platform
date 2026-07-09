@@ -1,7 +1,10 @@
+import { userSlice } from '@/entities/user/model/userSlice'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
-    reducer: {},
+    reducer: {
+        user: userSlice.reducer,
+    },
 })
 
 export type RootState = ReturnType<typeof store.getState>
