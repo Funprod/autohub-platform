@@ -1,4 +1,4 @@
-import { counterSlice } from "@/entities/counter/model/slice";
+import { counterSlice } from "@/entities/Counter/model/slice";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
