@@ -13,8 +13,8 @@ export const authApi = baseApi.injectEndpoints({
             }),
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
-                    const data = await queryFulfilled
-                    dispatch(setUser(data.data))
+                    const result = await queryFulfilled
+                    dispatch(setUser(result.data))
                 } catch {}
             },
         }),
