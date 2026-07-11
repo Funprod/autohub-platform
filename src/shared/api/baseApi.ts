@@ -6,10 +6,11 @@ import {
     fetchBaseQuery,
     FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react'
+import { redirectToLogin } from '../lib/navigation/redirect'
 
 const baseQuery = fetchBaseQuery({ baseUrl: '/', credentials: 'include' })
 
-const baseQueryWithReauth: BaseQueryFn<
+export const baseQueryWithReauth: BaseQueryFn<
     string | FetchArgs,
     unknown,
     FetchBaseQueryError
@@ -25,9 +26,7 @@ const baseQueryWithReauth: BaseQueryFn<
             result = await baseQuery(args, api, extraOptions)
         } else {
             api.dispatch(clearUser())
-            if (typeof window !== 'undefined') {
-                window.location.href = '/login'
-            }
+            redirectToLogin()
         }
     }
     return result

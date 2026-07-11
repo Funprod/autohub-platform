@@ -171,7 +171,7 @@ const eslintConfig = defineConfig([
         // Осознанное исключение: baseApi реализует auto-refresh логику (baseQueryWithReauth),
         // которая обязана диспатчить clearUser при истёкшей сессии.
         // См. ADR в README.
-        files: ['src/shared/api/baseApi.ts'],
+        files: ['src/shared/api/baseApi.ts', 'src/shared/api/baseApi.test.ts'],
         plugins: { boundaries },
         rules: {
             'boundaries/dependencies': [
