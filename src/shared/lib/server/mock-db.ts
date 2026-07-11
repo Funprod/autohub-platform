@@ -34,6 +34,6 @@ export function createUser(data: Omit<StoredUser, 'id'>) {
 }
 
 export function toPublicUser(u: StoredUser): User {
-    const { passwordHash, ...publicUser } = u
+    const { passwordHash: _passwordHash, ...publicUser } = u
     return publicUser
 }

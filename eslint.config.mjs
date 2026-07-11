@@ -167,6 +167,39 @@ const eslintConfig = defineConfig([
             ],
         },
     },
+    {
+        // Осознанное исключение: baseApi реализует auto-refresh логику (baseQueryWithReauth),
+        // которая обязана диспатчить clearUser при истёкшей сессии.
+        // См. ADR в README.
+        files: ['src/shared/api/baseApi.ts'],
+        plugins: { boundaries },
+        rules: {
+            'boundaries/dependencies': [
+                'error',
+                {
+                    default: 'disallow',
+                    policies: [
+                        {
+                            from: { element: { types: ['shared'] } },
+                            allow: {
+                                to: {
+                                    element: { types: ['shared', 'entities'] },
+                                },
+                            },
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        rules: {
+            '@typescript-eslint/no-unused-vars': [
+                'warn',
+                { varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+            ],
+        },
+    },
     ...storybook.configs['flat/recommended'],
 ])
 
