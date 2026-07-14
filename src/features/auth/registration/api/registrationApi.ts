@@ -5,7 +5,10 @@ import { RegistrationFormValues } from '../model/schema'
 
 export const registrationApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        register: builder.mutation<User, RegistrationFormValues>({
+        register: builder.mutation<
+            User,
+            Omit<RegistrationFormValues, 'confirmPassword'>
+        >({
             query: (body) => ({
                 url: 'api/auth/register',
                 method: 'POST',

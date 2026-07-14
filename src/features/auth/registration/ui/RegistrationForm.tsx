@@ -1,9 +1,16 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Stack } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+
+import {
+    isErrorWithMessage,
+    isFetchBaseQueryError,
+} from '@/shared/lib/api/error-helpers'
+import { useRouter } from 'next/navigation'
+import { useRegisterMutation } from '../api/registrationApi'
 import { RegistrationFormValues, registrationSchema } from '../model/schema'
 import { CredentialsStep } from './steps/CredentialsStep'
 import { PersonalInfoStep } from './steps/PersonalInfoStep'
@@ -17,10 +24,23 @@ const STEPS_FIELDS: Record<number, (keyof RegistrationFormValues)[]> = {
 
 export const RegistrationForm = () => {
     const [step, setStep] = useState(1)
+    const router = useRouter()
     const { control, setValue, handleSubmit, trigger } =
         useForm<RegistrationFormValues>({
             resolver: zodResolver(registrationSchema),
+            defaultValues: {
+                firstName: '',
+                surname: '',
+                type: '' as RegistrationFormValues['type'],
+                role: '' as RegistrationFormValues['role'],
+                branch: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+            },
         })
+
+    const [registration, { isLoading, error }] = useRegisterMutation()
 
     const handleNext = async () => {
         const isValid = await trigger(STEPS_FIELDS[step])
@@ -33,9 +53,12 @@ export const RegistrationForm = () => {
         setStep((prev) => prev - 1)
     }
 
-    const onSubmit = (data: RegistrationFormValues) => {
-        // тут будет вызов мутации register — добавим отдельным шагом
-        console.log(data)
+    const onSubmit = async (data: RegistrationFormValues) => {
+        const { confirmPassword: _confirmPassword, ...rest } = data
+        const result = await registration(rest)
+        if (!result.error) {
+            router.push('/')
+        }
     }
 
     return (
@@ -61,6 +84,15 @@ export const RegistrationForm = () => {
                         <Button type="submit">Зарегистрироваться</Button>
                     )}
                 </Stack>
+                {isLoading && <Typography>Регистрация...</Typography>}
+                {error && (
+                    <Typography color="error">
+                        {isFetchBaseQueryError(error) &&
+                        isErrorWithMessage(error.data)
+                            ? error.data.message
+                            : 'Произошла ошибка, попробуйте позже'}
+                    </Typography>
+                )}
             </Stack>
         </form>
     )
