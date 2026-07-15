@@ -4,7 +4,7 @@ import { useGetCurrentUserQuery } from '@/entities/user/api/userApi'
 import { Box, CircularProgress } from '@mui/material'
 import { usePathname } from 'next/navigation'
 
-const PUBLIC_PATHS = ['/login', '/register']
+const PUBLIC_PATHS = ['/login', '/registration', '/password-reset']
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname()
