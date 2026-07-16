@@ -13,7 +13,10 @@ export const userApi = baseApi.injectEndpoints({
                 } catch {}
             },
         }),
+        getUsers: builder.query<User[], void>({
+            query: () => 'api/admin/users',
+        }),
     }),
 })
 
-export const { useGetCurrentUserQuery } = userApi
+export const { useGetCurrentUserQuery, useGetUsersQuery } = userApi
