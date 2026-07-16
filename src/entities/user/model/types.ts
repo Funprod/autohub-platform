@@ -1,4 +1,10 @@
-export type Role = 'manager' | 'operator' | 'admin' | 'supervisor' | 'analyst'
+export type Role =
+    | 'manager'
+    | 'operator'
+    | 'admin'
+    | 'supervisor'
+    | 'analyst'
+    | 'dealership-head'
 
 export interface User {
     id: string
