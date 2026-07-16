@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { InputForm } from '@/shared/ui/form/InputForm'
+import { GoogleLoginButton } from '../../by-google/ui/GoogleLoginButton'
 import { useLoginMutation } from '../api/authByEmailApi'
 import { LoginFormValues, loginSchema } from '../model/schema'
 
@@ -52,11 +53,17 @@ export const LoginForm = () => {
                     label="Password"
                     type="password"
                 />
+                <Stack spacing={2}>
+                    <Button disabled={isLoading} type="submit">
+                        Войти
+                    </Button>
+                    <GoogleLoginButton />
+                </Stack>
+                <Stack spacing={2} direction={'row'}>
+                    <Link href="/registration">Регистрация</Link>
+                    <Link href="/password-reset">Сброс пароля</Link>
+                </Stack>
             </Stack>
-            <Button disabled={isLoading} type="submit">
-                Войти
-            </Button>
-            <Link href="/registration">Регистрация</Link>
         </form>
     )
 }
