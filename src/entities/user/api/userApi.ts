@@ -1,6 +1,6 @@
 import { baseApi } from '@/shared/api/baseApi'
-import { setUser } from '../model/slice'
-import type { User } from '../model/types'
+import { clearUser, setUser } from '../model/slice'
+import type { Role, User } from '../model/types'
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -13,10 +13,35 @@ export const userApi = baseApi.injectEndpoints({
                 } catch {}
             },
         }),
+        logout: builder.mutation<{ success: true }, void>({
+            query: () => ({
+                url: 'api/auth/logout',
+                method: 'POST',
+            }),
+            async onQueryStarted(_, { dispatch }) {
+                try {
+                    dispatch(clearUser())
+                } catch {}
+            },
+        }),
         getUsers: builder.query<User[], void>({
             query: () => 'api/admin/users',
+            providesTags: ['User'],
+        }),
+        updateUserRole: builder.mutation<User, { id: string; role: Role }>({
+            query: ({ id, role }) => ({
+                url: `api/admin/users/${id}`,
+                method: 'PATCH',
+                body: { role },
+            }),
+            invalidatesTags: ['User'],
         }),
     }),
 })
 
-export const { useGetCurrentUserQuery, useGetUsersQuery } = userApi
+export const {
+    useGetCurrentUserQuery,
+    useLogoutMutation,
+    useGetUsersQuery,
+    useUpdateUserRoleMutation,
+} = userApi
