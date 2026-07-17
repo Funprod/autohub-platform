@@ -1,10 +1,5 @@
-import Link from 'next/link'
+import { Box } from '@mui/material'
 
 export default function Page() {
-    return (
-        <div>
-            <h1>Home</h1>
-            <Link href="/login">Войти</Link>
-        </div>
-    )
+    return <Box>Добро пожаловать на AutoHub Platform</Box>
 }
