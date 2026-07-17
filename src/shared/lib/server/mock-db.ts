@@ -1,5 +1,5 @@
 // eslint-disable-next-line boundaries/dependencies
-import { User } from '@/entities/user/model/types'
+import { Role, User } from '@/entities/user/model/types'
 import bcrypt from 'bcryptjs'
 
 interface StoredUser extends User {
@@ -244,4 +244,11 @@ export function updateUserPassword(email: string, newPasswordHash: string) {
 
 export function getAllUsers(): User[] {
     return users.map(toPublicUser)
+}
+
+export function updateUserRole(id: string, role: Role): User | null {
+    const user = users.find((u) => u.id === id)
+    if (!user) return null
+    user.role = role
+    return toPublicUser(user)
 }
