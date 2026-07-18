@@ -6,7 +6,7 @@ export interface AnalyticsDataPoint {
     conversion: number
 }
 
-export interface RequestParamsAnalytics {
+export interface AnalyticsRequestParams {
     dealershipCenterId: string
     from: string
     to: string
