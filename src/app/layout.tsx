@@ -4,7 +4,6 @@ import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import { AppProviders } from './providers/AppProviders'
 import { AuthProvider } from './providers/AuthProvider'
 import { StoreProvider } from './providers/StoreProvider'
-import { Header } from '@/widgets/header/ui/Header'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -39,12 +38,9 @@ export default function RootLayout({
             <body className={inter.variable}>
                 <StoreProvider>
                     <AppRouterCacheProvider>
-                        <AppProviders>
-                            <AuthProvider>
-                                <Header />
-                                {children}
-                            </AuthProvider>
-                        </AppProviders>
+                        <AuthProvider>
+                            <AppProviders>{children}</AppProviders>
+                        </AuthProvider>
                     </AppRouterCacheProvider>
                 </StoreProvider>
             </body>

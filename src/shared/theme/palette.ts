@@ -11,8 +11,8 @@ export const palette = {
         main: colors.secondary,
     },
 
-    color: {
-        white: colors.white,
+    white: {
+        main: colors.white,
     },
 
     success: {

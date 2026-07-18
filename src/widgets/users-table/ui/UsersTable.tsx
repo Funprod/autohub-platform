@@ -11,7 +11,7 @@ import {
     isFetchBaseQueryError,
 } from '@/shared/lib/api/error-helpers'
 import { exportToExcel } from '@/shared/lib/export/exportToExcel'
-import { Button, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 
 const columns: GridColDef[] = [
@@ -66,7 +66,7 @@ export const UsersTable = () => {
     }
 
     return (
-        <>
+        <Box>
             {error && (
                 <Typography color="error">
                     {isFetchBaseQueryError(error) &&
@@ -86,6 +86,6 @@ export const UsersTable = () => {
                 }}
             />
             <Button onClick={handleExport}>Экспорт в Excel</Button>
-        </>
+        </Box>
     )
 }

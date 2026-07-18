@@ -10,7 +10,7 @@ export function Link({ href, children, ...props }: Props) {
         <MuiLink
             component={NextLink}
             href={href}
-            underline="hover"
+            underline="none"
             color="primary"
             {...props}
         >

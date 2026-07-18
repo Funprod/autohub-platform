@@ -1,12 +1,15 @@
 'use client'
 
 import { useLogoutMutation } from '@/entities/user/api/userApi'
-import { useAppSelector } from '@/shared/lib/hooks/redux-hooks'
+import { Link } from '@/shared/ui/Link'
 import { Box, Button, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/navigation'
 
-export const Header = () => {
-    const isAuth = useAppSelector((state) => state.user.isAuthenticated)
+interface Props {
+    isAuth: boolean
+}
+
+export const Header = ({ isAuth }: Props) => {
     const [logout] = useLogoutMutation()
     const router = useRouter()
 
@@ -31,7 +34,9 @@ export const Header = () => {
                 bgcolor: 'primary.main',
                 display: 'flex',
                 alignItems: 'center',
-                marginBottom: 2,
+                position: 'sticky',
+                top: 0,
+                zIndex: (theme) => theme.zIndex.appBar,
             }}
         >
             <Stack
@@ -39,7 +44,12 @@ export const Header = () => {
                     paddingLeft: '24px',
                 }}
             >
-                <Typography color="primary.main" variant="h6">
+                <Typography
+                    component={Link}
+                    href="/"
+                    variant="h6"
+                    sx={{ color: 'white.main' }}
+                >
                     AutoHub Platform
                 </Typography>
             </Stack>
