@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const RequireRole = ({ allowedRoles, children }: Props) => {
-    const role = useAppSelector((state) => state.user.user?.role)
+    const role = useAppSelector((state) => state.userReducer.user?.role)
 
     if (!role || !allowedRoles.includes(role)) {
         return <Typography color="error">Доступ запрещен</Typography>

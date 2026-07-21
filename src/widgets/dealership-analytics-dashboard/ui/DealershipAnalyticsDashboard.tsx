@@ -1,11 +1,10 @@
 'use client'
 import { useGetAnalyticsQuery } from '@/entities/analytics/api/analyticsApi'
 import { useGetDealershipCentersQuery } from '@/entities/dealership-center/api/dealershipCenterApi'
-import { MenuItem, Stack, TextField, Typography } from '@mui/material'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+
+import { SimpleDatePicker } from '@/shared/ui/form/SimpleDatePicker'
+import { Box, MenuItem, Stack, TextField, Typography } from '@mui/material'
 import { PickerValue } from '@mui/x-date-pickers/internals'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { useState } from 'react'
 import { ContractsChart } from './charts/ContractsChart'
 import { ConversionChart } from './charts/ConversionChart'
@@ -36,7 +35,7 @@ export const DealershipAnalyticsDashboard = () => {
     }
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Box>
             <Stack spacing={3}>
                 <TextField
                     select
@@ -54,12 +53,12 @@ export const DealershipAnalyticsDashboard = () => {
                     ))}
                 </TextField>
                 <Stack direction="row" spacing={2}>
-                    <DatePicker
+                    <SimpleDatePicker
                         label="Выберите откуда начать"
                         value={from}
                         onChange={handleDatePickerFrom}
                     />
-                    <DatePicker
+                    <SimpleDatePicker
                         label="Выберите до куда искать"
                         value={to}
                         onChange={handleDatePickerTo}
@@ -75,6 +74,6 @@ export const DealershipAnalyticsDashboard = () => {
                     </>
                 )}
             </Stack>
-        </LocalizationProvider>
+        </Box>
     )
 }

@@ -42,6 +42,11 @@ export const Sidebar = () => {
                             <ListItemText primary="Воронка продаж" />
                         </ListItemButton>
                     </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton href="/create-test-drive">
+                            <ListItemText primary="Тест драйв" />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
             </nav>
         </Box>

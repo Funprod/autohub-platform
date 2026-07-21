@@ -30,6 +30,7 @@ export const SelectForm = <T extends FieldValues>({
                     <Select
                         {...field}
                         {...restProps}
+                        value={field.value ?? ''}
                         labelId={`${name}-label`}
                         label={label}
                     >

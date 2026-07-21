@@ -1,10 +1,12 @@
 import { userSlice } from '@/entities/user/model/slice'
 import { baseApi } from '@/shared/api/baseApi'
+import { notificationsSlice } from '@/shared/model/notifications/slice'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
     reducer: {
-        user: userSlice.reducer,
+        userReducer: userSlice.reducer,
+        notificationsReducer: notificationsSlice.reducer,
         [baseApi.reducerPath]: baseApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>

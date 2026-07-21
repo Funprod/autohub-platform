@@ -1,0 +1,37 @@
+export interface TestDriveRecord {
+    id: string
+    firstName: string
+    lastName: string
+    middleName?: string
+    phone: string
+    email?: string
+    preferredContactMethod: string
+    birthDate: string
+    driverLicenseSeries: string
+    driverLicenseNumber: string
+    driverLicenseCategory: string
+    driverLicenseExpiresAt: string
+    brand: string
+    model: string
+    configuration?: string
+    color?: string
+    date: string
+    time: string
+    duration: number
+    dealershipCenterId: string
+    location: string
+    address?: string
+    tradeIn: boolean
+    tradeInCarBrand?: string
+    tradeInCarModel?: string
+    tradeInCarYear?: number
+    tradeInCarMileage?: number
+    managerId?: string
+    leadSource: string
+    status: string
+    internalComment?: string
+    clientComment?: string
+    attachmentNames: string[]
+    createdBy: string
+    createdAt: string
+}
